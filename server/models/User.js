@@ -3,37 +3,49 @@ const bcrypt = require('bcrypt');
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must match an email address!'],
+    },
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 5,
+    },
+    profilePicture: {
+      type: String,
+      default: ""
+    },
+    coverPicture: {
+      type: String,
+      default: ""
+    },
+    followers: {
+      type: Array,
+      default: []
+    },
+    following: {
+      type: Array,
+      default: []
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    }
   },
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 5,
-  },
-  //posts: [Post.schema]
-});
+  {timestamps: true}
+);
 
 userSchema.pre('save', async function(next) {
   if (this.isNew || this.isModified('password')) {
