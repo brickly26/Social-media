@@ -2,7 +2,7 @@
   "name": "instagram",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
@@ -21,7 +21,15 @@
     "url": "https://github.com/brickly26/instagram/issues"
   },
   "homepage": "https://github.com/brickly26/instagram#readme",
-  "dependencies": {
+  "devDependencies": {
     "concurrently": "^6.3.0"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.4.0",
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "graphql": "^15.7.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12"
   }
 }
