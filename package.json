@@ -23,5 +23,8 @@
   "homepage": "https://github.com/brickly26/instagram#readme",
   "devDependencies": {
     "concurrently": "^6.3.0"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.19.0"
   }
 }

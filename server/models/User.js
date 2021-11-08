@@ -1,7 +1,5 @@
-const mongoose = require('mongoose');
+const { Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
-
-const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
@@ -23,28 +21,8 @@ const userSchema = new Schema(
       trim: true,
       minlength: 5,
     },
-    profilePicture: {
-      type: String,
-      default: ""
-    },
-    coverPicture: {
-      type: String,
-      default: ""
-    },
-    followers: {
-      type: Array,
-      default: []
-    },
-    following: {
-      type: Array,
-      default: []
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  {timestamps: true}
+    createdAt: String
+  }
 );
 
 userSchema.pre('save', async function(next) {
@@ -60,6 +38,6 @@ userSchema.methods.isCorrectPassword = async function(password) {
   return await bcrypt.compare(password, this.password)
 };
 
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
